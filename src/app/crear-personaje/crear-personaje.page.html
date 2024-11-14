@@ -1,0 +1,68 @@
+<ion-content>
+  <div class="container">
+    <h1 class="title">CREACIÓN DE PERSONAJE</h1>
+
+    <div class="center-character-info">
+      <div class="character-info">
+        <p>NIVEL: 1</p>
+        <input type="text" placeholder="Nombre" [(ngModel)]="nombre" required />
+        <input type="number" placeholder="Edad" [(ngModel)]="edad" required />
+        <input type="number" placeholder="Estatura" [(ngModel)]="estatura" required />
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="left-column">
+        <div class="stat-block">
+          <h3>CARACTERÍSTICAS</h3>
+          <p>Fuerza <span><input type="number" [(ngModel)]="fuerza" (change)="checkTotalCaracteristicas1()" min="0"></span></p>
+          <p>Destreza <span><input type="number" [(ngModel)]="destreza" (change)="checkTotalCaracteristicas1()" min="0"></span></p>
+          <p>Constitución <span><input type="number" [(ngModel)]="constitucion" (change)="checkTotalCaracteristicas1()" min="0"></span></p>
+          <p>Inteligencia <span><input type="number" [(ngModel)]="inteligencia" (change)="checkTotalCaracteristicas1()" min="0"></span></p>
+          <p>Sabiduría <span><input type="number" [(ngModel)]="sabiduria" (change)="checkTotalCaracteristicas1()" min="0"></span></p>
+          <p>Apariencia <span><input type="number" [(ngModel)]="apariencia" (change)="checkTotalCaracteristicas1()" min="0"></span></p>
+          <p>Total <span>72</span></p>
+        </div>
+
+        <div class="stat-block">
+          <h3>CARACTERÍSTICAS</h3>
+          <p>Musculatura <span><input type="number" [(ngModel)]="musculatura" (change)="checkTotalCaracteristicas2()" min="0"></span></p>
+          <p>Puntería <span><input type="number" [(ngModel)]="punteria" (change)="checkTotalCaracteristicas2()" min="0"></span></p>
+          <p>Salud <span><input type="number" [(ngModel)]="salud" (change)="checkTotalCaracteristicas2()" min="0"></span></p>
+          <p>Total <span>34</span></p>
+        </div>
+      </div>
+
+      <div class="center-column">
+        <img src="assets/EL_GORDO.png" alt="Logo" />
+      </div>
+
+      <div class="right-column">
+        <div class="stat-block">
+          <h3>CARACTERÍSTICAS</h3>
+          <p>Estamina <span><input type="number" [(ngModel)]="estamina" (change)="checkTotalCaracteristicas3()" min="0"></span></p>
+          <p>Balance <span><input type="number" [(ngModel)]="balance" (change)="checkTotalCaracteristicas3()" min="0"></span></p>
+          <p>Resistencia <span><input type="number" [(ngModel)]="resistencia" (change)="checkTotalCaracteristicas3()" min="0"></span></p>
+          <p>Conocimiento <span><input type="number" [(ngModel)]="conocimiento" (change)="checkTotalCaracteristicas3()" min="0"></span></p>
+          <p>F.Voluntad <span><input type="number" [(ngModel)]="fVoluntad" (change)="checkTotalCaracteristicas3()" min="0"></span></p>
+          <p>Carisma <span><input type="number" [(ngModel)]="carisma" (change)="checkTotalCaracteristicas3()" min="0"></span></p>
+          <p>Total <span>75</span></p>
+        </div>
+
+        <div class="stat-block">
+          <h3>CARACTERÍSTICAS</h3>
+          <p>Lógica <span><input type="number" [(ngModel)]="logica" (change)="checkTotalCaracteristicas4()" min="0"></span></p>
+          <p>Intuición <span><input type="number" [(ngModel)]="intuicion" (change)="checkTotalCaracteristicas4()" min="0"></span></p>
+          <p>Verborrea <span><input type="number" [(ngModel)]="verborrea" (change)="checkTotalCaracteristicas4()" min="0"></span></p>
+          <p>Total <span>34</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <ion-button expand="round" (click)="ItemsMaster()">
+        SIGUIENTE
+      </ion-button>
+    </div>
+  </div>
+</ion-content>
