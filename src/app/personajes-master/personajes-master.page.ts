@@ -10,10 +10,5 @@ export class PersonajesMasterPage {
 
   constructor(private navCtrl: NavController) { }
 
-  ItemsMaster() {
-    this.navCtrl.navigateForward('/items-master');
-  }
-
-  
 
 }

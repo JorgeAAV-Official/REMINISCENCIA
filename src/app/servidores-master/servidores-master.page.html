@@ -4,9 +4,8 @@
     <!-- Botón de regreso -->
     <div class="back-button">
       <a href="/npcs-master">
-        <ion-icon name="arrow-back-outline"></ion-icon>
+        <ion-icon name="arrow-back-outline" ></ion-icon>
       </a>
-      
     </div>
 
     <!-- Título de Servidores -->
@@ -20,29 +19,22 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Logo</th>
             <th>Nombre del servidor</th>
             <th>Número de jugadores</th>
+            <th>Eliminar</th> <!-- Nueva columna para el ícono de eliminar -->
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td><img src="../../assets/Login.jpg" alt="Logo Servidor 1" /></td>
-            <td>Servidor 1</td>
-            <td>28/40</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td><img src="../../assets/Registro.jpg" alt="Logo Servidor 2" /></td>
-            <td>Servidor 2</td>
-            <td>37/40</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td><img src="../../assets/Elegir_Rol.jpg" alt="Logo Servidor 3" /></td>
-            <td>Servidor 3</td>
-            <td>12/40</td>
+          <tr *ngFor="let servidor of servidores">
+            <td>{{ servidor.id }}</td>
+            <a href="/personajes-master">
+              <td>{{ servidor.nombre_sala }}</td>
+            </a>
+            <td>15/{{ servidor.max_jugadores }}</td>
+            <td>
+              <!-- Ícono de eliminar -->
+              <ion-icon name="trash-outline" (click)="eliminarServidor(servidor.id)" style="cursor: pointer;"></ion-icon>
+            </td>
           </tr>
         </tbody>
       </table>

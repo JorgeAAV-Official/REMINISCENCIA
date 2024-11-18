@@ -1,88 +1,155 @@
-$font-size-table-header: 16px;
-$font-size-table-cell: 14px;
-$padding-table: 12px;
-$border-radius: 15px;
-$shadow-opacity: 0.3;
-
 ion-content {
-    --background: url('/assets/personajes.jpg') no-repeat center center / cover;
-    background-size: cover;
-}
-
-.title {
-    font-family: 'Roboto', sans-serif;
-    font-size: 32px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #ff6f61;
-    margin-bottom: 20px;
-    text-align: center;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    --background: url('/assets/Login.jpg');
+    width: 100%;
+    
 }
 
 .container {
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff;
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
-    border-radius: $border-radius;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, $shadow-opacity);
+}
+
+.title {
+    position: relative;
+    left: -20px;
+    text-align: center;
+    font-size: 2em;  
+    font-weight: bold;
+    color: #ffda79;  
+    margin-bottom: 20px;
 }
 
 .center-character-info {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
-    gap: 20px;
+    width: 80%;
+    margin-bottom: 20px;
+    position: relative;
+    left: 70px;
 }
 
 .character-info {
-    font-family: 'Arial', sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-    color: #fff;
-}
-
-.table-container {
-    margin: 30px auto;
-    max-width: 90%;
-    overflow-x: auto;
-    border-radius: $border-radius;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, $shadow-opacity);
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: $border-radius;
-    overflow: hidden;
-}
-
-th, td {
-    padding: $padding-table;
-    border: 1px solid #444;
+    background: rgba(50, 50, 50, 0.7);
+    padding: 12px;
+    border-radius: 10px;
+    margin: 15px;
+    border: 1px solid #ccc;
+    width: 40%;
     text-align: center;
-    font-family: 'Arial', sans-serif;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-th {
-    font-size: $font-size-table-header;
-    font-weight: 600;
-    background-color: #ff6f61;
-    color: #fff;
+.character-info h2 {
+    font-size: 1.1em;
 }
 
-td {
-    font-size: $font-size-table-cell;
-    background-color: rgba(255, 255, 255, 0.1);
+.stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 20px 0;
+    width: 80%;
+    text-align: center;
+    position: relative;
+    left: 60px;
 }
 
-table tbody tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.05);
+.left-column,
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 45%;
 }
 
-table tbody tr:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    cursor: pointer;
+.center-column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;  /* Espacio pequeño para la imagen */
+    height: 300px;  /* Fija la altura para evitar que se estire */
+}
+
+.center-column img {
+    max-width: 150%;
+    max-height: 150%;
+    object-fit: contain;  /* Mantiene la proporción de la imagen */
+}
+
+.stat-block {
+    background: rgba(70, 70, 70, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    width: 100%;
+    border: 1px solid #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.stat-block:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.stat-block h3 {
+    font-size: 1em;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    color: #ffda79;
+    text-align: center;
+}
+
+.stat-block p {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.stat-block span {
+    color: #ffda79;
+    font-weight: bold;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.center-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.captured-image {
+    max-width: 100%;
+    max-height: 250px;
+    margin-top: 10px;
+}
+.footer {
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    width: 100%;             
+    padding: 10px 0;          
+    margin-top: 20px;         
+}
+
+.footer ion-button{
+    width: auto;  
+    max-width: 200px;  
+    position: relative;
+    left: -20px;
 }

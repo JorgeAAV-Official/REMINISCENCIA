@@ -5,17 +5,12 @@
       
       <div class="form-row">
         <ion-label>Nombre de la sala:</ion-label>
-        <ion-input placeholder="..." class="input-field"></ion-input>
-      </div>
-
-      <div class="form-row">
-        <ion-label>Imagen del Mundo:</ion-label>
-        <input type="file" accept="image/*" class="image-input" />
+        <ion-input placeholder="..." class="input-field" [(ngModel)]="nombreSala"></ion-input>
       </div>
 
       <div class="form-row">
         <ion-label>Máximo de Jugadores:</ion-label>
-        <ion-select placeholder="Seleccione" class="input-field">
+        <ion-select placeholder="Seleccione" class="input-field" [(ngModel)]="maxJugadores">
           <ion-select-option value="20">20</ion-select-option>
           <ion-select-option value="30">30</ion-select-option>
           <ion-select-option value="40">40</ion-select-option>
@@ -24,22 +19,21 @@
 
       <div class="form-row">
         <ion-label>Tipo de Sala:</ion-label>
-        <ion-select placeholder="Seleccione" class="input-field">
+        <ion-select placeholder="Seleccione" class="input-field" [(ngModel)]="tipoSala">
           <ion-select-option value="publica">Pública</ion-select-option>
-          <ion-select-option value="privada">Privada</ion-select-option>
         </ion-select>
       </div>
 
       <div class="form-row">
         <ion-label>Elegir Mapa:</ion-label>
-        <ion-select placeholder="Seleccione" class="input-field">
+        <ion-select placeholder="Seleccione" class="input-field" [(ngModel)]="mapaSeleccionado">
           <ion-select-option value="mapa1">Mapa 1</ion-select-option>
           <ion-select-option value="mapa2">Mapa 2</ion-select-option>
           <ion-select-option value="mapa3">Mapa 3</ion-select-option>
         </ion-select>
       </div>
 
-      <ion-button expand="block" class="submit-button" (click)="PersonajesMaster()">Siguiente</ion-button>
+      <ion-button expand="block" class="submit-button" (click)="crearServidor()">Siguiente</ion-button>
     </div>
   </div>
 </ion-content>

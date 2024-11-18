@@ -69,6 +69,42 @@ export class CrearPersonajePage {
     return total === this.totalCaracteristicas4;
   }
 
+  // Método para crear personaje y enviar al backend
+  crearPersonaje() {
+    const personaje = {
+      nombre: this.nombre,
+      edad: this.edad,
+      estatura: this.estatura,
+      fuerza: this.fuerza,
+      destreza: this.destreza,
+      constitucion: this.constitucion,
+      inteligencia: this.inteligencia,
+      sabiduria: this.sabiduria,
+      apariencia: this.apariencia,
+      musculatura: this.musculatura,
+      punteria: this.punteria,
+      salud: this.salud,
+      estamina: this.estamina,
+      balance: this.balance,
+      resistencia: this.resistencia,
+      conocimiento: this.conocimiento,
+      fVoluntad: this.fVoluntad,
+      carisma: this.carisma,
+      logica: this.logica,
+      intuicion: this.intuicion,
+      verborrea: this.verborrea,
+      servidor_id: this.servidorId,
+    };
+
+    this.http.post('http://localhost:3000/crear-personaje', personaje)
+      .subscribe(response => {
+        console.log('Personaje creado:', response);
+        this.navCtrl.navigateForward('/items-master');
+      }, error => {
+        console.error('Error al crear el personaje:', error);
+      });
+  }
+
   // Método para navegar a la siguiente página solo si la sumatoria es correcta
   ItemsMaster() {
     if (
@@ -77,6 +113,7 @@ export class CrearPersonajePage {
       this.checkTotalCaracteristicas3() &&
       this.checkTotalCaracteristicas4()
     ) {
+      this.crearPersonaje(); // Llamamos a la función para crear el personaje
     } else {
       alert('Revisa que todos los totales sean correctos antes de continuar.');
     }

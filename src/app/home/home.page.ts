@@ -11,6 +11,6 @@ export class HomePage {
   constructor(private navCtrl: NavController) {} 
 
   iniciar() {
-    this.navCtrl.navigateForward('/elegir-rol');
+    this.navCtrl.navigateForward('/login');
   }
 }

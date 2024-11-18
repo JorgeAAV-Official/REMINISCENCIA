@@ -13,6 +13,13 @@
           <ion-label position="floating">Contraseña</ion-label>
           <ion-input type="password" [(ngModel)]="contrasena" name="contrasena"></ion-input>
         </ion-item>
+        <ion-item class="input-item">
+          <ion-label>Rol</ion-label>
+          <ion-select [(ngModel)]="rol" name="rol" interface="action-sheet">
+            <ion-select-option value="master">Master</ion-select-option>
+            <ion-select-option value="player">Player</ion-select-option>
+          </ion-select>
+        </ion-item>
         <ion-button expand="block" class="login-button" (click)="login()">Ingresar</ion-button>
         <ion-button expand="block" class="start-button" (click)="Registrarse()">
           REGISTRARSE

@@ -78,6 +78,10 @@ const routes: Routes = [
     path: 'caracteristicas',
     loadChildren: () => import('./caracteristicas/caracteristicas.module').then( m => m.CaracteristicasPageModule)
   },
+  {
+    path: 'crear-personaje',
+    loadChildren: () => import('./crear-personaje/crear-personaje.module').then( m => m.CrearPersonajePageModule)
+  },
 
 
 ];

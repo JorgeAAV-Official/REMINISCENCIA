@@ -1,11 +1,9 @@
 <ion-header>
- 
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="background-image"></div> <!-- Fondo de la imagen -->
+  <div class="background-image"></div>
   <ion-title>Registro</ion-title>
-  <!-- Contenedor para los botones -->
   <div class="button-container">
     <form (ngSubmit)="register()">
       <ion-item>
@@ -28,9 +26,15 @@
         <ion-input type="password" [(ngModel)]="contrasena" name="contrasena" required></ion-input>
       </ion-item>
 
-      <!-- Botón para registrarse -->
+      <ion-item>
+        <ion-label position="floating">Rol</ion-label>
+        <ion-select [(ngModel)]="rol" name="rol" required>
+          <ion-select-option value="master">Master</ion-select-option>
+          <ion-select-option value="player">Player</ion-select-option>
+        </ion-select>
+      </ion-item>
+
       <ion-button expand="block" type="submit" class="start-button">Registrarse</ion-button>
-      <!-- Botón para ir al login -->
       <ion-button expand="block" type="button" (click)="goToLogin()" class="start-button">Iniciar sesión</ion-button>
     </form>
   </div>
