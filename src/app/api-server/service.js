@@ -2,11 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { Pool } = require('pg');
+const bcrypt = require('bcrypt');
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// Configuración de la base de datos
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
@@ -34,9 +36,8 @@ app.post('/crear-servidor', async (req, res) => {
 // Endpoint para obtener todos los servidores
 app.get('/servidores', async (req, res) => {
   try {
-    // Consultar todos los servidores de la base de datos
     const result = await pool.query('SELECT * FROM servidores');
-    res.json(result.rows); // Devuelve los servidores en formato JSON
+    res.json(result.rows);
   } catch (error) {
     console.error('Error al obtener los servidores:', error);
     res.status(500).json({ error: 'Error al obtener los servidores' });
@@ -77,17 +78,27 @@ app.post('/crear-personaje', async (req, res) => {
   }
 });
 
-
-
-
-// Endpoint para registrar un usuario
 app.post('/register', async (req, res) => {
   const { nombre, usuario, email, contrasena, rol } = req.body;
 
+  // Validar correo electrónico
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ error: 'Correo electrónico no válido.' });
+  }
+
+  // Validar contraseña
+  if (contrasena.length < 8) {
+    return res.status(400).json({ error: 'La contraseña debe tener al menos 8 caracteres.' });
+  }
+
   try {
+    // Cifrar la contraseña
+    const hashedPassword = await bcrypt.hash(contrasena, 10);
+
     const result = await pool.query(
       'INSERT INTO usuarios (nombre, usuario, email, contrasena, rol) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [nombre, usuario, email, contrasena, rol]
+      [nombre, usuario, email, hashedPassword, rol]
     );
     res.status(201).json(result.rows[0]);
   } catch (error) {
@@ -101,16 +112,25 @@ app.post('/login', async (req, res) => {
   const { usuario, contrasena, rol } = req.body;
 
   try {
+    // Buscar al usuario por nombre de usuario y rol
     const result = await pool.query(
-      'SELECT * FROM usuarios WHERE usuario = $1 AND contrasena = $2 AND rol = $3',
-      [usuario, contrasena, rol]
+      'SELECT * FROM usuarios WHERE usuario = $1 AND rol = $2',
+      [usuario, rol]
     );
 
     if (result.rows.length > 0) {
       const user = result.rows[0];
-      res.json({ success: true, role: user.rol });
+
+      // Comparar contraseñas
+      const match = await bcrypt.compare(contrasena, user.contrasena);
+
+      if (match) {
+        res.json({ success: true, role: user.rol });
+      } else {
+        res.json({ success: false, message: 'Contraseña incorrecta' });
+      }
     } else {
-      res.json({ success: false, message: 'Usuario, contraseña o rol incorrectos' });
+      res.json({ success: false, message: 'Usuario o rol incorrectos' });
     }
   } catch (error) {
     console.error('Error en el inicio de sesión:', error);
@@ -118,6 +138,7 @@ app.post('/login', async (req, res) => {
   }
 });
 
+// Configuración del servidor
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);

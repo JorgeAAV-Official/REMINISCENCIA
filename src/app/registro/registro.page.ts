@@ -12,7 +12,7 @@ export class RegistroPage {
   usuario: string = '';
   email: string = '';
   contrasena: string = '';
-  rol: string = ''; // Nuevo campo rol
+  rol: string = '';
 
   constructor(
     private navCtrl: NavController,
@@ -20,11 +20,30 @@ export class RegistroPage {
     private http: HttpClient
   ) {}
 
-  goToLogin() {
-    this.navCtrl.navigateForward('/login');
-  }
-
   async register() {
+    // Validar correo electrónico
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(this.email)) {
+      const toast = await this.toastController.create({
+        message: 'Ingrese un correo válido.',
+        duration: 2000,
+        color: 'danger',
+      });
+      toast.present();
+      return;
+    }
+
+    // Validar contraseña
+    if (this.contrasena.length < 8) {
+      const toast = await this.toastController.create({
+        message: 'La contraseña debe tener al menos 8 caracteres.',
+        duration: 2000,
+        color: 'danger',
+      });
+      toast.present();
+      return;
+    }
+
     if (this.nombre && this.usuario && this.email && this.contrasena && this.rol) {
       const data = {
         nombre: this.nombre,
@@ -35,40 +54,39 @@ export class RegistroPage {
       };
 
       // Enviar datos al servidor
-      this.http.post('http://localhost:3000/register', data)
-        .subscribe(
-          async response => {
-            console.log('Usuario registrado:', response);
+      this.http.post('http://localhost:3000/register', data).subscribe(
+        async (response) => {
+          console.log('Usuario registrado:', response);
 
-            // Mostrar mensaje de éxito
-            const toast = await this.toastController.create({
-              message: 'Registro exitoso',
-              duration: 2000,
-              color: 'success'
-            });
-            toast.present();
+          // Mostrar mensaje de éxito
+          const toast = await this.toastController.create({
+            message: 'Registro exitoso',
+            duration: 2000,
+            color: 'success',
+          });
+          toast.present();
 
-            // Navegar a otra página o reiniciar el formulario
-            this.navCtrl.navigateRoot('/inicio');
-          },
-          async error => {
-            console.error('Error al registrar:', error);
+          // Navegar a otra página o reiniciar el formulario
+          this.navCtrl.navigateRoot('/login');
+        },
+        async (error) => {
+          console.error('Error al registrar:', error);
 
-            // Mostrar mensaje de error
-            const toast = await this.toastController.create({
-              message: 'Error al registrar. Intente nuevamente.',
-              duration: 2000,
-              color: 'danger'
-            });
-            toast.present();
-          }
-        );
+          // Mostrar mensaje de error
+          const toast = await this.toastController.create({
+            message: 'Error al registrar. Intente nuevamente.',
+            duration: 2000,
+            color: 'danger',
+          });
+          toast.present();
+        }
+      );
     } else {
       // Mostrar un mensaje de error si falta algún campo
       const toast = await this.toastController.create({
         message: 'Por favor, complete todos los campos',
         duration: 2000,
-        color: 'danger'
+        color: 'danger',
       });
       toast.present();
     }
